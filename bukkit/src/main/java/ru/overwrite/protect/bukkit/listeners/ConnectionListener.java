@@ -37,7 +37,7 @@ public class ConnectionListener implements Listener {
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onLogin(PlayerLoginEvent e) {
 		Player p = e.getPlayer();
-		instance.getRunner().runAsync (() -> {
+		instance.getRunner().runAsync(() -> {
 			if (instance.isPermissions(p)) {
 				String ip = e.getAddress().getHostAddress();
 				if (pluginConfig.secure_settings_enable_ip_whitelist) {

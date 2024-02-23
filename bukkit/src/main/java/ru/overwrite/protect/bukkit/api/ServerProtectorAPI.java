@@ -1,15 +1,14 @@
 package ru.overwrite.protect.bukkit.api;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
-
 import ru.overwrite.protect.bukkit.Logger;
 import ru.overwrite.protect.bukkit.ServerProtectorManager;
 import ru.overwrite.protect.bukkit.utils.Config;
 import ru.overwrite.protect.bukkit.utils.Utils;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ServerProtectorAPI {
 
@@ -46,7 +45,8 @@ public class ServerProtectorAPI {
 	}
 
 	public boolean isAuthorised(Player p) {
-		return pluginConfig.session_settings_session ? ips.contains(p.getName() + Utils.getIp(p))
+		return pluginConfig.session_settings_session
+				? ips.contains(p.getName() + Utils.getIp(p))
 				: saved.contains(p.getName());
 	}
 
