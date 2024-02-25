@@ -18,6 +18,9 @@ import ru.overwrite.protect.bukkit.listeners.AdditionalListener;
 import ru.overwrite.protect.bukkit.listeners.ChatListener;
 import ru.overwrite.protect.bukkit.listeners.ConnectionListener;
 import ru.overwrite.protect.bukkit.listeners.InteractionsListener;
+import ru.overwrite.protect.bukkit.logging.BukkitLogger;
+import ru.overwrite.protect.bukkit.logging.PaperLogger;
+import ru.overwrite.protect.bukkit.logging.PluginLogger;
 import ru.overwrite.protect.bukkit.task.BukkitRunner;
 import ru.overwrite.protect.bukkit.task.PaperRunner;
 import ru.overwrite.protect.bukkit.task.Runner;
@@ -25,10 +28,11 @@ import ru.overwrite.protect.bukkit.task.TaskManager;
 import ru.overwrite.protect.bukkit.utils.Config;
 import ru.overwrite.protect.bukkit.utils.PluginMessage;
 import ru.overwrite.protect.bukkit.utils.Utils;
-import ru.overwrite.protect.bukkit.utils.logging.BukkitLogger;
-import ru.overwrite.protect.bukkit.utils.logging.PaperLogger;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -36,7 +40,7 @@ import java.util.*;
 public class ServerProtectorManager extends JavaPlugin {
 
 	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("[dd-MM-yyy] HH:mm:ss -");
-	private final Logger logger = Utils.FOLIA ? new PaperLogger(this) : new BukkitLogger(this);
+	private final PluginLogger pluginLogger = Utils.FOLIA ? new PaperLogger(this) : new BukkitLogger(this);
 	
 	public static String serialiser; // this is bullshit
 	public boolean proxy = false;
@@ -80,8 +84,8 @@ public class ServerProtectorManager extends JavaPlugin {
 		return pluginMessage;
 	}
 
-	public Logger getPluginLogger() {
-		return logger;
+	public PluginLogger getPluginLogger() {
+		return pluginLogger;
 	}
 
 	public Runner getRunner() {
@@ -335,7 +339,7 @@ public class ServerProtectorManager extends JavaPlugin {
 	}
 
 	public void loggerInfo(String logMessage) {
-		logger.info(logMessage);
+		pluginLogger.info(logMessage);
 	}
 
 	public void logAction(String key, Player player, Date date) {

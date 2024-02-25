@@ -13,7 +13,7 @@ import java.util.List;
 
 public final class ServerProtector extends ServerProtectorManager {
 	
-	private final List<String> forceshutdown = Arrays.asList("PlugMan", "PlugManX", "PluginManager", "ServerUtils");
+	private static final List<String> forceshutdown = Arrays.asList("PlugMan", "PlugManX", "PluginManager", "ServerUtils");
 
 	@Override
 	public void onEnable() {
